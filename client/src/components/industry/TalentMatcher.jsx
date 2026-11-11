@@ -3,15 +3,11 @@ import { useApp } from '../../context/AppContext';
 import {
   ShieldCheck,
   CheckCircle2,
-  ExternalLink,
   Award,
   Send,
-  Filter,
   Eye,
   ChevronDown,
-  ChevronUp,
-  Sparkles,
-  Lock
+  ChevronUp
 } from 'lucide-react';
 
 // Explainable AI (XAI) Candidate Evaluation Insight
@@ -35,11 +31,11 @@ const getCandidateXAIExplanation = (candidate, jobSkills, matchScore) => {
   if (matchScore >= 75) {
     const strongStr = strong.slice(0, 2).join(' & ');
     const gapStr = deficits.length > 0 ? ` Minor gap in ${deficits[0].skill} (${deficits[0].diff}% below target).` : '';
-    return `Top Recommended Candidate: Exceeds benchmark thresholds in ${strongStr || 'core competencies'} with ${candidate.verifiedProjectsCount} verified project submissions.${gapStr}`;
+    return `Top recommended candidate: Exceeds benchmark thresholds in ${strongStr || 'core competencies'} with ${candidate.verifiedProjectsCount} verified project submissions.${gapStr}`;
   } else if (matchScore >= 60) {
-    return `Viable Candidate: Solid domain understanding with ${strong.length} benchmarked skills. Has a ${deficits[0]?.diff || 15}% gap in ${deficits[0]?.skill || 'advanced modules'}, solvable via quick corporate onboarding.`;
+    return `Viable candidate: Solid domain understanding with ${strong.length} benchmarked skills. Has a ${deficits[0]?.diff || 15}% gap in ${deficits[0]?.skill || 'advanced modules'}, solvable via quick onboarding.`;
   } else {
-    return `Requires Bridging: Identified significant skill delta in ${deficits.slice(0, 2).map(d => d.skill).join(' & ')}. Recommended for pre-hire training track rather than direct interview.`;
+    return `Requires bridging: Identified skill delta in ${deficits.slice(0, 2).map(d => d.skill).join(' & ')}. Recommended for pre-hire training track rather than direct interview.`;
   }
 };
 
@@ -71,28 +67,28 @@ export const TalentMatcher = () => {
   };
 
   return (
-    <div className="space-y-6 animate-fadeIn">
+    <div className="space-y-6">
       {/* Selector & Filter Bar */}
-      <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white p-5 sm:p-6 rounded-xl border border-slate-200 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-100">
-            Automated Skill-Fit Ranker
+          <span className="text-xs font-medium text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">
+            Automated skill-fit ranker
           </span>
-          <h2 className="text-xl font-black text-slate-900 mt-1">
+          <h2 className="text-lg sm:text-xl font-semibold text-slate-900 mt-2">
             Verified Candidates for Active Role
           </h2>
-          <p className="text-xs text-slate-500">
-            No resume keyword fluff. Candidates are ranked based strictly on proctored assessments and verified project code.
+          <p className="text-xs text-slate-500 mt-0.5">
+            Candidates ranked by verified assessment scores and project evaluations.
           </p>
         </div>
 
         {/* Role Selector */}
         <div className="flex items-center gap-3">
-          <label className="text-xs font-bold text-slate-600 shrink-0">Hiring For:</label>
+          <label className="text-xs font-medium text-slate-600 shrink-0">Hiring For:</label>
           <select
             value={selectedJobId}
             onChange={e => setSelectedJobId(e.target.value)}
-            className="px-3.5 py-2 rounded-xl text-xs font-bold border border-slate-300 bg-slate-50 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="px-3 py-1.5 rounded-lg text-xs font-medium border border-slate-300 bg-white focus:outline-none focus:ring-1 focus:ring-emerald-500"
           >
             {jobs.map(j => (
               <option key={j.id} value={j.id}>
@@ -105,11 +101,11 @@ export const TalentMatcher = () => {
 
       {/* Required Skill Thresholds Strip */}
       {activeJob && (
-        <div className="p-4 rounded-xl bg-slate-900 text-white flex flex-wrap items-center justify-between gap-4">
+        <div className="p-4 rounded-xl bg-slate-900 text-white flex flex-wrap items-center justify-between gap-4 border border-slate-800">
           <div className="flex items-center gap-2">
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
-            <span className="text-xs font-bold text-emerald-300 uppercase tracking-wider">
-              Evaluating Against Benchmark:
+            <span className="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span className="text-xs font-medium text-emerald-300">
+              Evaluating against benchmark:
             </span>
           </div>
 
@@ -117,7 +113,7 @@ export const TalentMatcher = () => {
             {Object.entries(activeJob?.requiredSkills || activeJob?.required_skills || {}).map(([skill, req]) => (
               <span
                 key={skill}
-                className="text-[11px] font-mono bg-white/10 px-2.5 py-1 rounded-lg border border-white/15 text-slate-200"
+                className="text-[11px] font-mono bg-white/10 px-2.5 py-0.5 rounded-md border border-white/10 text-slate-200"
               >
                 {skill}: <strong className="text-emerald-400">≥{req}%</strong>
               </span>
@@ -136,13 +132,13 @@ export const TalentMatcher = () => {
           return (
             <div
               key={candidate.id}
-              className="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all overflow-hidden"
+              className="bg-white rounded-xl border border-slate-200 shadow-xs hover:border-slate-300 transition-colors overflow-hidden"
             >
               {/* Summary Header */}
               <div className="p-5 sm:p-6 flex flex-col md:flex-row md:items-center justify-between gap-5">
                 <div className="flex items-center gap-4">
                   {/* Rank indicator */}
-                  <div className={`w-8 h-8 rounded-xl flex items-center justify-center font-black text-xs shrink-0 ${
+                  <div className={`w-8 h-8 rounded-lg flex items-center justify-center font-bold text-xs shrink-0 ${
                     rankIdx === 0
                       ? 'bg-amber-100 text-amber-900 border border-amber-300'
                       : 'bg-slate-100 text-slate-700'
@@ -153,17 +149,17 @@ export const TalentMatcher = () => {
                   <img
                     src={candidate.avatar}
                     alt={candidate.name}
-                    className="w-12 h-12 rounded-xl object-cover ring-2 ring-emerald-500/20"
+                    className="w-11 h-11 rounded-lg object-cover ring-1 ring-slate-200"
                   />
 
                   <div>
                     <div className="flex items-center gap-2">
-                      <h3 className="text-sm sm:text-base font-extrabold text-slate-900">
+                      <h3 className="text-sm sm:text-base font-semibold text-slate-900">
                         {candidate.name}
                       </h3>
-                      <span className="inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200">
+                      <span className="inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
                         <ShieldCheck className="w-3 h-3 text-emerald-600" />
-                        Verified Skills
+                        Verified skills
                       </span>
                     </div>
                     <p className="text-xs text-slate-500 mt-0.5">
@@ -175,9 +171,9 @@ export const TalentMatcher = () => {
                 {/* Score & Action Buttons */}
                 <div className="flex items-center gap-4 shrink-0 justify-between md:justify-end">
                   <div className="text-right">
-                    <div className="text-[11px] text-slate-400 font-semibold">Verified Match</div>
-                    <div className={`text-xl font-black ${
-                      isShortlisted ? 'text-emerald-600' : 'text-amber-600'
+                    <div className="text-[11px] text-slate-500 font-medium">Verified match</div>
+                    <div className={`text-xl font-bold font-mono ${
+                      isShortlisted ? 'text-emerald-700' : 'text-amber-700'
                     }`}>
                       {candidate.matchScore}%
                     </div>
@@ -186,7 +182,7 @@ export const TalentMatcher = () => {
                   <div className="flex items-center gap-2">
                     <button
                       onClick={() => toggleExpand(candidate.id)}
-                      className="p-2 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-bold flex items-center gap-1"
+                      className="px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-medium flex items-center gap-1"
                       title="Inspect Skills"
                     >
                       <Eye className="w-3.5 h-3.5" />
@@ -197,10 +193,10 @@ export const TalentMatcher = () => {
                     <button
                       onClick={() => handleSendInvite(candidate.name)}
                       disabled={hasBeenInvited}
-                      className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all ${
+                      className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition-colors ${
                         hasBeenInvited
                           ? 'bg-emerald-100 text-emerald-800'
-                          : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm shadow-emerald-200'
+                          : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs'
                       }`}
                     >
                       {hasBeenInvited ? (
@@ -221,10 +217,10 @@ export const TalentMatcher = () => {
 
               {/* Detailed Breakdown Drawer */}
               {isExpanded && (
-                <div className="bg-slate-50/70 p-5 sm:p-6 border-t border-slate-200 space-y-4 animate-fadeIn">
+                <div className="bg-slate-50 p-5 sm:p-6 border-t border-slate-200 space-y-4">
                   <div className="flex items-center justify-between">
-                    <div className="text-xs font-bold text-slate-700">
-                      Evaluated Skill Match vs Role Requirements:
+                    <div className="text-xs font-semibold text-slate-700">
+                      Evaluated skill match vs role requirements:
                     </div>
                     <span className="text-[11px] text-slate-500 font-mono">
                       Trust Hash: 0x{candidate.id.split('-')[1]}...verified
@@ -238,16 +234,16 @@ export const TalentMatcher = () => {
                       const meetsBenchmark = candidateLevel >= benchmark;
 
                       return (
-                        <div key={skill} className="bg-white p-3 rounded-xl border border-slate-200 text-xs space-y-1.5">
+                        <div key={skill} className="bg-white p-3 rounded-lg border border-slate-200 text-xs space-y-1.5">
                           <div className="flex items-center justify-between">
-                            <span className="font-semibold text-slate-800">{skill}</span>
-                            <span className={`font-mono font-bold ${meetsBenchmark ? 'text-emerald-600' : 'text-amber-600'}`}>
+                            <span className="font-medium text-slate-800">{skill}</span>
+                            <span className={`font-mono font-semibold ${meetsBenchmark ? 'text-emerald-700' : 'text-amber-700'}`}>
                               {candidateLevel}% / {benchmark}%
                             </span>
                           </div>
                           <div className="w-full bg-slate-100 h-1.5 rounded-full overflow-hidden flex">
                             <div
-                              className={`h-full rounded-full ${meetsBenchmark ? 'bg-emerald-500' : 'bg-amber-500'}`}
+                              className={`h-full rounded-full ${meetsBenchmark ? 'bg-emerald-600' : 'bg-amber-600'}`}
                               style={{ width: `${candidateLevel}%` }}
                             />
                           </div>
@@ -257,10 +253,10 @@ export const TalentMatcher = () => {
                   </div>
 
                   {/* Explainable AI Candidate Match Rationale */}
-                  <div className="bg-white p-3.5 rounded-xl border border-indigo-100 shadow-xs space-y-1">
-                    <div className="flex items-center gap-1.5 font-bold text-xs text-indigo-950">
-                      <Sparkles className="w-3.5 h-3.5 text-indigo-600" />
-                      <span>AI Candidate Ranking Rationale (XAI):</span>
+                  <div className="bg-white p-3.5 rounded-lg border border-slate-200 space-y-1">
+                    <div className="flex items-center gap-1.5 font-semibold text-xs text-slate-900">
+                      <ShieldCheck className="w-3.5 h-3.5 text-indigo-600" />
+                      <span>Candidate match rationale (Explainable AI):</span>
                     </div>
                     <p className="text-[11px] text-slate-600 leading-relaxed">
                       {getCandidateXAIExplanation(candidate, activeJob.requiredSkills, candidate.matchScore)}
@@ -270,9 +266,9 @@ export const TalentMatcher = () => {
                   <div className="flex items-center justify-between pt-2 text-xs text-slate-500">
                     <span className="flex items-center gap-1.5">
                       <Award className="w-3.5 h-3.5 text-indigo-600" />
-                      {candidate.verifiedProjectsCount} Verified Real-World Projects • {candidate.credentialsCount} Faculty Co-Certifications
+                      {candidate.verifiedProjectsCount} verified projects • {candidate.credentialsCount} faculty certifications
                     </span>
-                    <span className="text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                    <span className="text-emerald-800 font-medium bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
                       {candidate.readinessTier}
                     </span>
                   </div>

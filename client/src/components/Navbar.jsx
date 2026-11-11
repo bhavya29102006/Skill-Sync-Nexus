@@ -6,7 +6,6 @@ import {
   BookOpen,
   School,
   RotateCcw,
-  Sparkles,
   ShieldCheck,
   LogIn,
   UserCheck,
@@ -20,67 +19,58 @@ export const Navbar = () => {
     {
       id: 'student',
       label: 'Student Portal',
-      icon: GraduationCap,
-      color: 'from-blue-600 to-indigo-600',
-      activeBadge: 'bg-indigo-50 text-indigo-700 border-indigo-200'
+      icon: GraduationCap
     },
     {
       id: 'industry',
       label: 'Industry / Recruiter',
-      icon: Briefcase,
-      color: 'from-emerald-600 to-teal-600',
-      activeBadge: 'bg-emerald-50 text-emerald-700 border-emerald-200'
+      icon: Briefcase
     },
     {
       id: 'faculty',
       label: 'Academician / Faculty',
-      icon: BookOpen,
-      color: 'from-violet-600 to-purple-600',
-      activeBadge: 'bg-purple-50 text-purple-700 border-purple-200'
+      icon: BookOpen
     },
     {
       id: 'institution',
       label: 'Institution / Dean',
-      icon: School,
-      color: 'from-amber-600 to-orange-600',
-      activeBadge: 'bg-amber-50 text-amber-700 border-amber-200'
+      icon: School
     }
   ];
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 gap-4">
           
           {/* Logo Brand */}
           <div className="flex items-center gap-3 shrink-0">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 via-indigo-500 to-sky-400 flex items-center justify-center text-white shadow-md shadow-indigo-200">
-              <Sparkles className="w-5 h-5" />
+            <div className="w-9 h-9 rounded-lg bg-indigo-600 flex items-center justify-center text-white border border-indigo-700/50 shadow-xs">
+              <ShieldCheck className="w-5 h-5 text-white" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="font-extrabold text-lg tracking-tight text-slate-900">
-                  SkillSync <span className="text-indigo-600 font-black">Nexus</span>
+                <span className="font-bold text-base tracking-tight text-slate-900">
+                  SkillSync <span className="text-indigo-600 font-semibold">Nexus</span>
                 </span>
-                <span className="hidden sm:inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-100 uppercase tracking-wider">
-                  <ShieldCheck className="w-3 h-3 text-indigo-500" />
-                  Verified Bridge
+                <span className="hidden sm:inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-md bg-slate-100 text-slate-700 border border-slate-200">
+                  Verified bridge
                 </span>
                 {isLiveBackend && (
-                  <span className="hidden lg:inline-flex items-center gap-1 text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    Express API :5000
+                  <span className="hidden lg:inline-flex items-center gap-1 text-[11px] font-medium px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-800 border border-emerald-200">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                    API connected
                   </span>
                 )}
               </div>
               <p className="text-[11px] text-slate-500 font-medium hidden md:block">
-                Connecting Students, Industry, Faculty & Institutions
+                Connecting students, industry, faculty, and institutions
               </p>
             </div>
           </div>
 
           {/* Interactive Persona Switcher Tabs */}
-          <div className="flex items-center bg-slate-100/90 p-1 rounded-xl border border-slate-200 shadow-inner overflow-x-auto">
+          <div className="flex items-center bg-slate-100 p-1 rounded-lg border border-slate-200 overflow-x-auto">
             {roleConfigs.map((config) => {
               const Icon = config.icon;
               const isActive = role === config.id;
@@ -88,10 +78,10 @@ export const Navbar = () => {
                 <button
                   key={config.id}
                   onClick={() => setRole(config.id)}
-                  className={`flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold transition-all whitespace-nowrap ${
+                  className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-medium transition-colors whitespace-nowrap ${
                     isActive
-                      ? 'bg-white text-slate-900 shadow-sm border border-slate-200/80 font-extrabold scale-[1.02]'
-                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
+                      ? 'bg-white text-slate-900 shadow-xs border border-slate-200 font-semibold'
+                      : 'text-slate-600 hover:text-slate-900 hover:bg-white/60'
                   }`}
                 >
                   <Icon className={`w-3.5 h-3.5 ${isActive ? 'text-indigo-600' : 'text-slate-400'}`} />
@@ -107,29 +97,29 @@ export const Navbar = () => {
               href="/demo-video.mp4"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200/80 shadow-2xs transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold text-rose-700 bg-rose-50 hover:bg-rose-100 border border-rose-200 transition-colors"
               title="Watch Full Prototype Video Demo"
             >
               <Play className="w-3.5 h-3.5 text-rose-600 fill-rose-600" />
-              <span className="hidden sm:inline">Watch Demo</span>
+              <span className="hidden sm:inline">Watch demo</span>
             </a>
 
             <button
               onClick={() => setIsAuthModalOpen(true)}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-indigo-700 bg-indigo-50/80 hover:bg-indigo-100/90 border border-indigo-200/80 shadow-2xs transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-semibold text-slate-700 bg-slate-100 hover:bg-slate-200 border border-slate-200 transition-colors"
               title="Authentication & Role Login Gateway"
             >
-              <LogIn className="w-3.5 h-3.5 text-indigo-600" />
-              <span className="hidden sm:inline">Sign In / Register</span>
+              <LogIn className="w-3.5 h-3.5 text-slate-600" />
+              <span className="hidden sm:inline">Sign in / Register</span>
             </button>
 
             <button
               onClick={resetAllData}
               title="Reset Demo Data"
-              className="p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg text-xs font-semibold border border-transparent hover:border-slate-200 transition-all flex items-center gap-1.5"
+              className="p-2 text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-md text-xs font-medium border border-transparent hover:border-slate-200 transition-colors flex items-center gap-1.5"
             >
               <RotateCcw className="w-3.5 h-3.5" />
-              <span className="hidden lg:inline">Reset State</span>
+              <span className="hidden lg:inline">Reset</span>
             </button>
 
             {role === 'student' && (
@@ -141,38 +131,38 @@ export const Navbar = () => {
                 <img
                   src={student.avatar}
                   alt={student.name}
-                  className="w-8 h-8 rounded-full ring-2 ring-indigo-500/30 object-cover"
+                  className="w-8 h-8 rounded-full ring-1 ring-slate-200 object-cover"
                 />
                 <div className="hidden xl:block text-left text-xs">
-                  <div className="font-bold text-slate-800 leading-tight flex items-center gap-1">
+                  <div className="font-semibold text-slate-800 leading-tight flex items-center gap-1">
                     {student.name}
                     <UserCheck className="w-3 h-3 text-indigo-500" />
                   </div>
-                  <div className="text-[10px] text-emerald-600 font-semibold flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-                    {student.readinessScore}% Ready
+                  <div className="text-[10px] text-emerald-700 font-medium flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                    {student.readinessScore}% ready
                   </div>
                 </div>
               </button>
             )}
 
             {role === 'industry' && (
-              <div className="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded-lg bg-emerald-50 border border-emerald-200 text-xs font-bold text-emerald-800">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                Recruiter Portal
+              <div className="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded-md bg-emerald-50 border border-emerald-200 text-xs font-medium text-emerald-800">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+                Recruiter portal
               </div>
             )}
 
             {role === 'faculty' && (
-              <div className="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded-lg bg-purple-50 border border-purple-200 text-xs font-bold text-purple-800">
-                <span className="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></span>
-                Academician Hub
+              <div className="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded-md bg-purple-50 border border-purple-200 text-xs font-medium text-purple-800">
+                <span className="w-1.5 h-1.5 rounded-full bg-purple-600"></span>
+                Academician hub
               </div>
             )}
 
             {role === 'institution' && (
-              <div className="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded-lg bg-amber-50 border border-amber-200 text-xs font-bold text-amber-800">
-                <span className="w-2 h-2 rounded-full bg-amber-500 animate-pulse"></span>
+              <div className="hidden sm:flex items-center gap-2 px-2.5 py-1 rounded-md bg-amber-50 border border-amber-200 text-xs font-medium text-amber-800">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-600"></span>
                 Apex Inst. Dean
               </div>
             )}

@@ -47,20 +47,6 @@ export const SkillRadarChart = ({
         viewBox={`0 0 ${size} ${size}`}
         className="overflow-visible"
       >
-        <defs>
-          <linearGradient id="studentGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#6366f1" stopOpacity="0.45" />
-            <stop offset="100%" stopColor="#8b5cf6" stopOpacity="0.15" />
-          </linearGradient>
-          <radialGradient id="radarCenterGlow" cx="50%" cy="50%" r="50%">
-            <stop offset="0%" stopColor="#e0e7ff" stopOpacity="0.6" />
-            <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
-          </radialGradient>
-        </defs>
-
-        {/* Center subtle glow */}
-        <circle cx={center} cy={center} r={radius} fill="url(#radarCenterGlow)" />
-
         {/* Concentric Grid Polygons */}
         {levels.map((lvl) => {
           const ringPoints = keys.map((_, i) => {
@@ -73,7 +59,7 @@ export const SkillRadarChart = ({
               <polygon
                 points={ringPoints}
                 fill="none"
-                stroke={lvl === 100 ? "#cbd5e1" : "#e2e8f0"}
+                stroke={lvl === 100 ? "#cbd5e1" : "#f1f5f9"}
                 strokeWidth={lvl === 100 ? "1.5" : "1"}
                 strokeDasharray={lvl === 100 ? "none" : "3,3"}
               />
@@ -107,15 +93,15 @@ export const SkillRadarChart = ({
                 x2={outer.x}
                 y2={outer.y}
                 stroke="#e2e8f0"
-                strokeWidth="1.2"
+                strokeWidth="1"
               />
               <text
                 x={labelPos.x}
                 y={labelPos.y + 4}
                 textAnchor={textAnchor}
                 fontSize="11"
-                fontWeight="600"
-                fill="#334155"
+                fontWeight="500"
+                fill="#475569"
                 className="select-none"
               >
                 {key.length > 20 ? key.slice(0, 18) + '...' : key}
@@ -128,21 +114,21 @@ export const SkillRadarChart = ({
         {targetPoints && (
           <polygon
             points={targetPoints}
-            fill="rgba(245, 158, 11, 0.08)"
-            stroke="#f59e0b"
-            strokeWidth="2.5"
-            strokeDasharray="5,5"
-            className="transition-all duration-500"
+            fill="rgba(217, 119, 6, 0.06)"
+            stroke="#d97706"
+            strokeWidth="2"
+            strokeDasharray="4,4"
+            className="transition-all duration-300"
           />
         )}
 
         {/* Student Verified Profile Polygon */}
         <polygon
           points={studentPoints}
-          fill="url(#studentGradient)"
+          fill="rgba(79, 70, 229, 0.16)"
           stroke="#4f46e5"
-          strokeWidth="2.5"
-          className="transition-all duration-500"
+          strokeWidth="2"
+          className="transition-all duration-300"
         />
 
         {/* Student Data Nodes */}
@@ -150,15 +136,14 @@ export const SkillRadarChart = ({
           const val = skills[key] || 0;
           const { x, y } = getCoordinates(i, val);
           return (
-            <g key={key} className="group">
+            <g key={key}>
               <circle
                 cx={x}
                 cy={y}
-                r="4.5"
+                r="3.5"
                 fill="#4f46e5"
                 stroke="#ffffff"
-                strokeWidth="2"
-                className="transition-all duration-300 hover:r-6 cursor-pointer"
+                strokeWidth="1.5"
               />
             </g>
           );
@@ -166,15 +151,15 @@ export const SkillRadarChart = ({
       </svg>
 
       {/* Chart Legend */}
-      <div className="flex items-center gap-6 mt-4 text-xs font-semibold">
+      <div className="flex items-center gap-6 mt-4 text-xs font-medium">
         <div className="flex items-center gap-2">
-          <span className="w-3.5 h-3.5 rounded-full bg-indigo-600 inline-block shadow-sm"></span>
-          <span className="text-slate-700">Your Verified Skill Score</span>
+          <span className="w-2.5 h-2.5 rounded-full bg-indigo-600 inline-block"></span>
+          <span className="text-slate-700">Verified skill score</span>
         </div>
         {targetSkills && (
           <div className="flex items-center gap-2">
-            <span className="w-3.5 h-1 border-t-2 border-dashed border-amber-500 inline-block"></span>
-            <span className="text-amber-700">Industry Role Benchmark</span>
+            <span className="w-3.5 h-0.5 border-t-2 border-dashed border-amber-600 inline-block"></span>
+            <span className="text-amber-800">Industry benchmark</span>
           </div>
         )}
       </div>

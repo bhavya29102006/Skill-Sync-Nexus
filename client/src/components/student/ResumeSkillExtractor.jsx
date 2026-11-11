@@ -328,28 +328,28 @@ export const ResumeSkillExtractor = ({ onNavigateToRadar }) => {
   };
 
   return (
-    <div className="space-y-8 animate-fadeIn">
+    <div className="space-y-6">
       {/* Top Banner */}
-      <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <div className="bg-white p-5 sm:p-6 rounded-xl border border-slate-200 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <span className="text-xs font-bold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-2.5 py-1 rounded-full border border-indigo-100 flex items-center gap-1.5 w-fit">
+          <span className="text-xs font-medium text-indigo-700 bg-indigo-50 px-2.5 py-1 rounded-md border border-indigo-200 flex items-center gap-1.5 w-fit">
             <BrainCircuit className="w-3.5 h-3.5 text-indigo-600" />
-            AI & Automation Component
+            Resume Skill Extractor
           </span>
-          <h2 className="text-xl font-extrabold text-slate-900 mt-2">
-            AI Resume & Profile Skill Extractor
+          <h2 className="text-lg sm:text-xl font-semibold text-slate-900 mt-2">
+            Skill & Profile Parser
           </h2>
           <p className="text-xs text-slate-500 mt-1">
-            Uses NLP entity recognition to parse candidate resumes, identify authentic tech competencies, and auto-populate verified skill profiles in Supabase.
+            Extracts technical skills and project details from resumes, mapping them to the verified skill ledger.
           </p>
         </div>
 
         <button
           onClick={handleLoadSample}
-          className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold transition-all flex items-center gap-2 shrink-0"
+          className="px-3.5 py-2 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-medium transition-colors flex items-center gap-2 shrink-0"
         >
-          <Sparkles className="w-4 h-4 text-indigo-600" />
-          <span>Load Demo Resume</span>
+          <FileText className="w-4 h-4 text-slate-600" />
+          <span>Load sample resume</span>
         </button>
       </div>
 
@@ -408,32 +408,32 @@ export const ResumeSkillExtractor = ({ onNavigateToRadar }) => {
           <button
             onClick={handleAnalyzeResume}
             disabled={isAnalyzing}
-            className="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold shadow-md shadow-indigo-100 transition-all flex items-center justify-center gap-2 disabled:opacity-50"
+            className="w-full py-2.5 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-semibold shadow-xs transition-colors flex items-center justify-center gap-2 disabled:opacity-50"
           >
             {isAnalyzing ? (
               <>
                 <RefreshCw className="w-4 h-4 animate-spin text-white" />
-                <span>{analysisProgress || 'Running NLP Parsing Engine...'}</span>
+                <span>{analysisProgress || 'Parsing resume...'}</span>
               </>
             ) : (
               <>
                 <Cpu className="w-4 h-4" />
-                <span>Extract Skills with AI (NLP)</span>
+                <span>Extract skills from resume</span>
               </>
             )}
           </button>
         </div>
 
         {/* Right Column: Extracted Skills Ledger */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-5">
+        <div className="bg-white p-5 sm:p-6 rounded-xl border border-slate-200 shadow-xs space-y-5">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 font-bold text-sm text-slate-800">
-              <Sparkles className="w-4 h-4 text-emerald-600" />
-              <span>NLP Extracted Skills Ledger</span>
+            <div className="flex items-center gap-2 font-semibold text-sm text-slate-800">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+              <span>Extracted skills ledger</span>
             </div>
             {extractedData && (
-              <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200">
-                {extractedData.totalEntitiesFound} Skills Identified
+              <span className="text-xs font-medium text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
+                {extractedData.totalEntitiesFound} skills identified
               </span>
             )}
           </div>
@@ -448,17 +448,17 @@ export const ResumeSkillExtractor = ({ onNavigateToRadar }) => {
                       <User className="w-5 h-5" />
                     </div>
                     <div>
-                      <div className="font-extrabold text-sm text-slate-900">{extractedData.detectedName}</div>
+                      <div className="font-semibold text-sm text-slate-900">{extractedData.detectedName}</div>
                       <div className="text-[11px] text-slate-600 font-medium">{extractedData.detectedDepartment}</div>
                     </div>
                   </div>
-                  <span className="text-[10px] font-bold text-indigo-700 bg-indigo-100/70 px-2.5 py-1 rounded-md">
-                    Verified Profile
+                  <span className="text-[10px] font-medium text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">
+                    Verified profile
                   </span>
                 </div>
 
                 <div className="pt-2 border-t border-slate-200/80 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-500">
-                  <span className="flex items-center gap-1 font-semibold text-slate-700">
+                  <span className="flex items-center gap-1 font-medium text-slate-700">
                     <GraduationCap className="w-3.5 h-3.5 text-indigo-600" />
                     {extractedData.detectedCollege}
                   </span>
@@ -468,8 +468,8 @@ export const ResumeSkillExtractor = ({ onNavigateToRadar }) => {
 
               {/* Detected Projects Chip */}
               {extractedData.detectedProjects && extractedData.detectedProjects.length > 0 && (
-                <div className="p-3 bg-emerald-50/60 rounded-xl border border-emerald-100 text-xs space-y-1.5">
-                  <div className="text-[10px] font-bold uppercase text-emerald-700">Real-World Projects Detected ({extractedData.detectedProjects.length})</div>
+                <div className="p-3 bg-emerald-50/60 rounded-lg border border-emerald-100 text-xs space-y-1.5">
+                  <div className="text-[11px] font-semibold text-emerald-800">Real-World Projects Detected ({extractedData.detectedProjects.length})</div>
                   <ul className="text-[11px] text-emerald-950 font-medium space-y-1">
                     {extractedData.detectedProjects.map((p, idx) => (
                       <li key={idx} className="flex items-center gap-1.5">
@@ -482,8 +482,8 @@ export const ResumeSkillExtractor = ({ onNavigateToRadar }) => {
               )}
 
               {/* AI Domain Synthesis */}
-              <div className="p-3.5 rounded-xl bg-indigo-50/70 border border-indigo-100 text-xs space-y-1">
-                <div className="text-[10px] font-bold uppercase text-indigo-600">AI Domain Synthesis</div>
+              <div className="p-3.5 rounded-lg bg-indigo-50/50 border border-indigo-100 text-xs space-y-1">
+                <div className="text-[11px] font-semibold text-indigo-800">Extracted Domain Summary</div>
                 <p className="text-indigo-950 font-medium leading-relaxed text-[11px]">
                   {extractedData.summary}
                 </p>
@@ -494,24 +494,24 @@ export const ResumeSkillExtractor = ({ onNavigateToRadar }) => {
                 {Object.entries(extractedData.detectedSkills).map(([skill, data]) => (
                   <div
                     key={skill}
-                    className="p-3 rounded-xl border border-slate-100 bg-slate-50/50 hover:bg-white hover:border-slate-200 transition-all space-y-2 text-xs"
+                    className="p-3 rounded-lg border border-slate-200 bg-slate-50/50 hover:bg-white hover:border-slate-300 transition-colors space-y-2 text-xs"
                   >
                     <div className="flex items-center justify-between">
                       <div>
-                        <span className="font-bold text-slate-900">{skill}</span>
-                        <div className="text-[10px] text-slate-400 mt-0.5">
+                        <span className="font-semibold text-slate-900">{skill}</span>
+                        <div className="text-[10px] text-slate-500 mt-0.5">
                           {data.category} • {data.mentions} reference{data.mentions > 1 ? 's' : ''} in projects
                         </div>
                       </div>
                       <div className="text-right">
-                        <span className="text-[10px] text-slate-400 font-mono">{data.confidence}% confidence</span>
-                        <div className="text-xs font-black text-indigo-700">{data.level}%</div>
+                        <span className="text-[10px] text-slate-500 font-mono">{data.confidence}% confidence</span>
+                        <div className="text-xs font-bold font-mono text-indigo-700">{data.level}%</div>
                       </div>
                     </div>
 
                     <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
                       <div
-                        className="bg-indigo-600 h-full rounded-full transition-all duration-500"
+                        className="bg-indigo-600 h-full rounded-full transition-all duration-300"
                         style={{ width: `${data.level}%` }}
                       />
                     </div>
@@ -524,10 +524,10 @@ export const ResumeSkillExtractor = ({ onNavigateToRadar }) => {
                 <button
                   onClick={handleSyncToProfile}
                   disabled={isSynced}
-                  className={`flex-1 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+                  className={`flex-1 py-2 rounded-lg text-xs font-semibold transition-colors flex items-center justify-center gap-1.5 ${
                     isSynced
                       ? 'bg-emerald-100 text-emerald-800 border border-emerald-200'
-                      : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-sm shadow-emerald-100'
+                      : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs'
                   }`}
                 >
                   {isSynced ? (
@@ -538,26 +538,26 @@ export const ResumeSkillExtractor = ({ onNavigateToRadar }) => {
                   ) : (
                     <>
                       <Check className="w-4 h-4" />
-                      <span>Apply Skills to Verified Profile</span>
+                      <span>Apply skills to verified profile</span>
                     </>
                   )}
                 </button>
 
                 <button
                   onClick={onNavigateToRadar}
-                  className="px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-bold transition-all flex items-center justify-center gap-1 shrink-0"
+                  className="px-4 py-2 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-700 text-xs font-semibold transition-colors flex items-center justify-center gap-1 shrink-0"
                 >
-                  <span>View Radar Gap</span>
+                  <span>View radar chart</span>
                   <ArrowRight className="w-3.5 h-3.5" />
                 </button>
               </div>
             </div>
           ) : (
             <div className="py-16 text-center text-slate-400 space-y-3">
-              <Sparkles className="w-10 h-10 mx-auto text-slate-300" />
-              <div className="text-xs font-bold text-slate-600">No Skills Extracted Yet</div>
-              <p className="text-[11px] max-w-xs mx-auto text-slate-400 leading-relaxed">
-                Upload your resume file or paste your resume text on the left, then click <strong>Extract Skills with AI</strong> to generate your verified competency ledger.
+              <FileText className="w-10 h-10 mx-auto text-slate-300" />
+              <div className="text-xs font-semibold text-slate-700">No skills extracted yet</div>
+              <p className="text-[11px] max-w-xs mx-auto text-slate-500 leading-relaxed">
+                Upload your resume file or paste text on the left, then click <strong>Extract skills from resume</strong> to generate your competency ledger.
               </p>
             </div>
           )}

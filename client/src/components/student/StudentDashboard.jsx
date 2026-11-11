@@ -9,12 +9,10 @@ import {
   Compass,
   FileBadge,
   FileText,
-  Sparkles,
   Briefcase,
-  Layers,
-  HelpCircle,
   TrendingUp,
-  Award
+  Award,
+  CheckCircle2
 } from 'lucide-react';
 
 export const StudentDashboard = () => {
@@ -29,115 +27,110 @@ export const StudentDashboard = () => {
   const matchedJobsCount = (jobs || []).length;
 
   return (
-    <div className="space-y-8 animate-fadeIn">
+    <div className="space-y-6">
       {/* Top Quick Stats Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold">
-            <TrendingUp className="w-6 h-6" />
+        <div className="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 shadow-xs flex items-center gap-3.5">
+          <div className="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0">
+            <TrendingUp className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-2xl font-black text-slate-900">{readinessScoreVal}%</div>
-            <div className="text-xs text-slate-500 font-semibold">Career Readiness Score</div>
+            <div className="text-xl sm:text-2xl font-bold font-mono text-slate-900">{readinessScoreVal}%</div>
+            <div className="text-xs text-slate-500 font-medium">Career readiness score</div>
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-bold">
-            <Award className="w-6 h-6" />
+        <div className="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 shadow-xs flex items-center gap-3.5">
+          <div className="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0">
+            <Award className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-2xl font-black text-slate-900">{readySkillsCount} / {studentSkillsCount}</div>
-            <div className="text-xs text-slate-500 font-semibold">Industry-Ready Skills</div>
+            <div className="text-xl sm:text-2xl font-bold font-mono text-slate-900">{readySkillsCount} / {studentSkillsCount}</div>
+            <div className="text-xs text-slate-500 font-medium">Industry-ready skills</div>
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center font-bold">
-            <FileBadge className="w-6 h-6" />
+        <div className="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 shadow-xs flex items-center gap-3.5">
+          <div className="w-10 h-10 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0">
+            <FileBadge className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-2xl font-black text-slate-900">{verifiedProjectsCount}</div>
-            <div className="text-xs text-slate-500 font-semibold">Verified Projects Tracked</div>
+            <div className="text-xl sm:text-2xl font-bold font-mono text-slate-900">{verifiedProjectsCount}</div>
+            <div className="text-xs text-slate-500 font-medium">Verified projects tracked</div>
           </div>
         </div>
 
-        <div className="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex items-center gap-4">
-          <div className="w-12 h-12 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center font-bold">
-            <Briefcase className="w-6 h-6" />
+        <div className="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 shadow-xs flex items-center gap-3.5">
+          <div className="w-10 h-10 rounded-lg bg-slate-100 text-slate-700 flex items-center justify-center shrink-0">
+            <Briefcase className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-2xl font-black text-slate-900">{matchedJobsCount}</div>
-            <div className="text-xs text-slate-500 font-semibold">Matched Openings</div>
+            <div className="text-xl sm:text-2xl font-bold font-mono text-slate-900">{matchedJobsCount}</div>
+            <div className="text-xs text-slate-500 font-medium">Matched openings</div>
           </div>
         </div>
       </div>
 
       {/* Internal Navigation Sub-tabs */}
-      <div className="flex border-b border-slate-200 bg-white p-1 rounded-2xl shadow-xs overflow-x-auto gap-2">
+      <div className="flex border border-slate-200 bg-white p-1 rounded-xl shadow-xs overflow-x-auto gap-1">
         <button
           onClick={() => setActiveTab('gap')}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+          className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-colors whitespace-nowrap ${
             activeTab === 'gap'
-              ? 'bg-indigo-600 text-white shadow-sm'
+              ? 'bg-slate-900 text-white font-semibold shadow-xs'
               : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
           }`}
         >
           <Compass className="w-4 h-4" />
-          <span>Skill Gap Analyzer (Radar)</span>
+          <span>Skill gap analyzer</span>
         </button>
 
         <button
           onClick={() => setActiveTab('quiz')}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+          className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-colors whitespace-nowrap ${
             activeTab === 'quiz'
-              ? 'bg-indigo-600 text-white shadow-sm'
+              ? 'bg-slate-900 text-white font-semibold shadow-xs'
               : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
           }`}
         >
-          <Sparkles className="w-4 h-4" />
-          <span>Take Skill Quiz</span>
+          <CheckCircle2 className="w-4 h-4" />
+          <span>Take skill assessment</span>
         </button>
 
         <button
           onClick={() => setActiveTab('resume')}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+          className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-colors whitespace-nowrap ${
             activeTab === 'resume'
-              ? 'bg-indigo-600 text-white shadow-sm'
+              ? 'bg-slate-900 text-white font-semibold shadow-xs'
               : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
           }`}
         >
           <FileText className="w-4 h-4" />
-          <span>AI Resume Extractor (NLP)</span>
-          <span className={`text-[9px] px-1.5 py-0.2 rounded-full font-black uppercase ${
-            activeTab === 'resume' ? 'bg-white text-indigo-700' : 'bg-indigo-100 text-indigo-700'
-          }`}>
-            NEW
-          </span>
+          <span>Resume skill extractor</span>
         </button>
 
         <button
           onClick={() => setActiveTab('portfolio')}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+          className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-colors whitespace-nowrap ${
             activeTab === 'portfolio'
-              ? 'bg-indigo-600 text-white shadow-sm'
+              ? 'bg-slate-900 text-white font-semibold shadow-xs'
               : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
           }`}
         >
           <FileBadge className="w-4 h-4" />
-          <span>Verified Digital Portfolio</span>
+          <span>Verified digital portfolio</span>
         </button>
 
         <button
           onClick={() => setActiveTab('jobs')}
-          className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs font-bold transition-all whitespace-nowrap ${
+          className={`flex items-center gap-2 px-3.5 py-2 rounded-lg text-xs font-medium transition-colors whitespace-nowrap ${
             activeTab === 'jobs'
-              ? 'bg-indigo-600 text-white shadow-sm'
+              ? 'bg-slate-900 text-white font-semibold shadow-xs'
               : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
           }`}
         >
           <Briefcase className="w-4 h-4" />
-          <span>Matched Internships & Jobs ({jobs.length})</span>
+          <span>Matched openings ({jobs.length})</span>
         </button>
       </div>
 

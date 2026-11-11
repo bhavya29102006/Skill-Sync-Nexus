@@ -8,17 +8,13 @@
   }
 }
 
-/* Custom glowing and badge styles */
+/* Clean badge styles without artificial glow */
 .badge-verified {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(5, 150, 105, 0.05));
-  border: 1px solid rgba(16, 185, 129, 0.4);
+  background-color: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.25);
 }
 
-.radar-glow {
-  filter: drop-shadow(0 0 8px rgba(99, 102, 241, 0.3));
-}
-
-/* Custom scrollbars */
+/* Clean scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
